@@ -1,0 +1,13 @@
+F:\Projects\Restaurant Management System\RMS\RMS.DAL\bin\Debug\RMS.DAL.dll
+F:\Projects\Restaurant Management System\RMS\RMS.DAL\bin\Debug\RMS.DAL.pdb
+F:\Projects\Restaurant Management System\RMS\RMS.DAL\bin\Debug\Newtonsoft.Json.dll
+F:\Projects\Restaurant Management System\RMS\RMS.DAL\bin\Debug\System.Net.Http.Formatting.dll
+F:\Projects\Restaurant Management System\RMS\RMS.DAL\bin\Debug\System.Web.Http.dll
+F:\Projects\Restaurant Management System\RMS\RMS.DAL\bin\Debug\System.Web.Http.WebHost.dll
+F:\Projects\Restaurant Management System\RMS\RMS.DAL\bin\Debug\Newtonsoft.Json.xml
+F:\Projects\Restaurant Management System\RMS\RMS.DAL\bin\Debug\System.Net.Http.Formatting.xml
+F:\Projects\Restaurant Management System\RMS\RMS.DAL\bin\Debug\System.Web.Http.xml
+F:\Projects\Restaurant Management System\RMS\RMS.DAL\bin\Debug\System.Web.Http.WebHost.xml
+F:\Projects\Restaurant Management System\RMS\RMS.DAL\obj\Debug\RMS.DAL.csprojResolveAssemblyReference.cache
+F:\Projects\Restaurant Management System\RMS\RMS.DAL\obj\Debug\RMS.DAL.dll
+F:\Projects\Restaurant Management System\RMS\RMS.DAL\obj\Debug\RMS.DAL.pdb
