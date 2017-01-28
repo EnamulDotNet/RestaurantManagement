@@ -7,11 +7,12 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using RMS.BLL;
+using RMS.DAL;
 using RMS.Model;
 
 namespace RMS.UI.SaleUI
 {
-    public partial class ReturnSale : System.Web.UI.Page
+    public partial class ReturnSale : BasePage
     {
         private decimal tot;
         protected void Page_Load(object sender, EventArgs e)
@@ -19,6 +20,11 @@ namespace RMS.UI.SaleUI
             txtSaleReturnGrandTotal.Attributes.Add("readonly", "readonly");
             txtDiscount.Attributes.Add("readonly", "readonly");
             txtPaidAmount.Attributes.Add("readonly", "readonly");
+            txtCustomerUsername.Attributes.Add("readonly", "readonly");
+            txtCustomerFullName.Attributes.Add("readonly", "readonly");
+            txtDueByThisInvoice.Attributes.Add("readonly", "readonly");
+            txtTotalDue.Attributes.Add("readonly", "readonly");
+
             if (!IsPostBack)
             {
                 DataTable dt = new DataTable();
@@ -72,27 +78,35 @@ namespace RMS.UI.SaleUI
 
         protected void btnAdd_Click(object sender, EventArgs e)
         {
-            GvReturnSell.Visible = true;
-            DataTable dt = (DataTable)Session["ReturnSellProduct"];
-            for (int i = 0; i < GvReturnSell.Rows.Count; i++)
+            if (Convert.ToDecimal(txtSaleReturnQty.Text) <= Convert.ToDecimal(Request.Form[txtSellQtyReturnSale.UniqueID]))
             {
-                string id = GvReturnSell.Rows[i].Cells[0].Text;
-                if (id == txtSaleReturnProductCode.Text.Trim())
+                GvReturnSell.Visible = true;
+                DataTable dt = (DataTable)Session["ReturnSellProduct"];
+                for (int i = 0; i < GvReturnSell.Rows.Count; i++)
                 {
-                    dt.Rows[i].Delete();
-                    break;
+                    string id = GvReturnSell.Rows[i].Cells[0].Text;
+                    if (id == txtSaleReturnProductCode.Text.Trim())
+                    {
+                        dt.Rows[i].Delete();
+                        break;
+                    }
                 }
+                dt.Rows.Add(txtSaleReturnProductCode.Text.Trim(), txtSaleReturnProductName.Text.Trim(),
+                    Convert.ToDecimal(txtSaleReturnQty.Text.Trim()).ToString("N3"), Request.Form[txtPricePerUnitReturnSale.UniqueID],
+                       Request.Form[txtVatReturnSale.UniqueID], Request.Form[txtTotalPricePerProductSaleReturn.UniqueID]);
+                Session["ReturnSellProduct"] = dt;
+                this.GridviewBind();
+                txtToBeReturnSale.Text = (Convert.ToDecimal(GvReturnSell.FooterRow.Cells[5].Text)-Convert.ToDecimal(txtTotalDue.Text)).ToString("N2");
+                txtSaleReturnProductCode.Text = string.Empty;
+                txtSaleReturnProductName.Text = string.Empty;
+                txtSaleReturnQty.Text = string.Empty;
+                txtSaleReturnAmount.Text = string.Empty;
             }
-            dt.Rows.Add(txtSaleReturnProductCode.Text.Trim(), txtSaleReturnProductName.Text.Trim(),
-                Convert.ToDecimal(txtSaleReturnQty.Text.Trim()).ToString("N3"), Request.Form[txtPricePerUnitReturnSale.UniqueID],
-                   Request.Form[txtVatReturnSale.UniqueID], Request.Form[txtTotalPricePerProductSaleReturn.UniqueID]);
-            Session["ReturnSellProduct"] = dt;
-            this.GridviewBind();
-            txtToBeReturnSale.Text = GvReturnSell.FooterRow.Cells[5].Text;
-            txtSaleReturnProductCode.Text = string.Empty;
-            txtSaleReturnProductName.Text = string.Empty;
-            txtSaleReturnQty.Text=string.Empty;
-            txtSaleReturnAmount.Text = string.Empty;
+            else
+            {
+                MessageBox("Return qty can not be greater than sell qty!");
+            }
+            
         }
         private void GridviewBind()
         {
@@ -106,22 +120,21 @@ namespace RMS.UI.SaleUI
             SaleReturn objSaleReturn=new SaleReturn();
             SaleReturnBiz objSaleReturnBiz=new SaleReturnBiz();
             objSaleReturn.InvoiceNumber = Convert.ToInt32(txtSaleInvoiceNumber.Text.Trim());
-            //objSaleReturn.CustomerId = Convert.ToInt32(txtCustomerUsername.Text);
-            //objSaleReturn.ProductId = Convert.ToInt16(txtSaleReturnProductCode.Text.Trim());
-            //objSaleReturn.ReturnQuantity = Convert.ToDecimal(txtSaleReturnQty.Text.Trim());
-            //objSaleReturn.ReturnAmount = Convert.ToDecimal(txtReturnTotalAmount.Text.Trim());
+            objSaleReturn.CustomerUsername = txtCustomerUsername.Text;
             objSaleReturn.CreatedBy = Convert.ToInt16(Session["UserId"].ToString());
             objSaleReturn.Remarks = txtRemark.Text.Trim();
+            objSaleReturn.ReturnAmount = decimal.Parse(GvReturnSell.FooterRow.Cells[5].Text)-decimal.Parse(txtReturnTotalAmount.Text);
             for (int i = 0; i < GvReturnSell.Rows.Count; i++)
             {
 
                 objSaleReturn.ProductId = short.Parse(GvReturnSell.Rows[i].Cells[0].Text);
                 objSaleReturn.ReturnQuantity = decimal.Parse(GvReturnSell.Rows[i].Cells[2].Text);
-
+                
                 objSaleReturnBiz.ReturnProduct(objSaleReturn);
+                objSaleReturn.InvoiceNumber = 0;
             }
             GvReturnSell.Visible = false;
-
+            Response.Redirect(Request.Url.ToString());
         }
     }
 }

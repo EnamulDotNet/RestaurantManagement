@@ -11,8 +11,11 @@ namespace RMS.Model
         public int SaleReturnId { get; set; }
 
         public int CustomerId { get; set; }
+        public string CustomerUsername { get; set; }
+
 
         public int InvoiceNumber { get; set; }
+        
 
         public short ProductId { get; set; }
 

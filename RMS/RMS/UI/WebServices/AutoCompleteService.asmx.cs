@@ -631,8 +631,8 @@ namespace RMS.UI.WebServices
             DbDataReader objDbDataReader = null;
             string amount = "";
 
-            objDbCommand.AddInParameter("invoiceNo", invoiceNo);
-            objDbDataReader = objDataAccess.ExecuteReader(objDbCommand, "[rdb].[uspGetInvoiceInfo]", CommandType.StoredProcedure);
+            objDbCommand.AddInParameter("InvoiceNo", invoiceNo);
+            objDbDataReader = objDataAccess.ExecuteReader(objDbCommand, "[rdb].[uspGetCustomerDueByInvoice]", CommandType.StoredProcedure);
             try
             {
                 if (objDbDataReader.HasRows)
@@ -642,6 +642,11 @@ namespace RMS.UI.WebServices
                         objSale.TotalAmount = Convert.ToDecimal(objDbDataReader["TotalAmount"]);
                         objSale.DiscountAmount = Convert.ToDecimal(objDbDataReader["DiscountAmount"]);
                         objSale.PaidAmount = Convert.ToDecimal(objDbDataReader["PaidAmount"]);
+                        objSale.CustomerUsername = objDbDataReader["CustomerUsername"].ToString();
+                        objSale.CustomerFullName = objDbDataReader["CustomerFullName"].ToString();
+                        objSale.DueByThisInvoice = Convert.ToDecimal(objDbDataReader["DueByThisInvoice"]);
+                        objSale.TotalDue = Convert.ToDecimal(objDbDataReader["CustomerTotalDue"]);
+
 
                     }
                 }

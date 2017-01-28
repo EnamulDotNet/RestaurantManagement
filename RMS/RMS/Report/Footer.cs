@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace RMS.Report.PurchaseReport {
+namespace RMS.Report {
     using System;
     using System.ComponentModel;
     using CrystalDecisions.Shared;
@@ -16,14 +16,14 @@ namespace RMS.Report.PurchaseReport {
     using CrystalDecisions.CrystalReports.Engine;
     
     
-    public class SupplierwisePurchaseDetail : ReportClass {
+    public class Footer : ReportClass {
         
-        public SupplierwisePurchaseDetail() {
+        public Footer() {
         }
         
         public override string ResourceName {
             get {
-                return "SupplierwisePurchaseDetail.rpt";
+                return "Footer.rpt";
             }
             set {
                 // Do nothing
@@ -41,7 +41,7 @@ namespace RMS.Report.PurchaseReport {
         
         public override string FullResourceName {
             get {
-                return "RMS.Report.PurchaseReport.SupplierwisePurchaseDetail.rpt";
+                return "RMS.Report.Footer.rpt";
             }
             set {
                 // Do nothing
@@ -87,28 +87,12 @@ namespace RMS.Report.PurchaseReport {
                 return this.ReportDefinition.Sections[4];
             }
         }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_SupplierId {
-            get {
-                return this.DataDefinition.ParameterFields[0];
-            }
-        }
-        
-        [Browsable(false)]
-        [DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
-        public CrystalDecisions.Shared.IParameterField Parameter_InvoiceNumber {
-            get {
-                return this.DataDefinition.ParameterFields[1];
-            }
-        }
     }
     
     [System.Drawing.ToolboxBitmapAttribute(typeof(CrystalDecisions.Shared.ExportOptions), "report.bmp")]
-    public class CachedSupplierwisePurchaseDetail : Component, ICachedReport {
+    public class CachedFooter : Component, ICachedReport {
         
-        public CachedSupplierwisePurchaseDetail() {
+        public CachedFooter() {
         }
         
         [Browsable(false)]
@@ -145,7 +129,7 @@ namespace RMS.Report.PurchaseReport {
         }
         
         public virtual CrystalDecisions.CrystalReports.Engine.ReportDocument CreateReport() {
-            SupplierwisePurchaseDetail rpt = new SupplierwisePurchaseDetail();
+            Footer rpt = new Footer();
             rpt.Site = this.Site;
             return rpt;
         }

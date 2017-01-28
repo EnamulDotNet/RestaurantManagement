@@ -76,13 +76,13 @@ namespace RMS.UI.SaleUI {
         protected global::System.Web.UI.WebControls.TextBox txtCustomerUsername;
         
         /// <summary>
-        /// txtPaidByThisInvoice control.
+        /// txtCustomerFullName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPaidByThisInvoice;
+        protected global::System.Web.UI.WebControls.TextBox txtCustomerFullName;
         
         /// <summary>
         /// txtDueByThisInvoice control.

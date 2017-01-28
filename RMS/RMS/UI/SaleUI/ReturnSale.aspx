@@ -34,32 +34,32 @@
             </table>
         </asp:Panel>
     <br/>
-    <asp:Panel runat="server" ID="pnlCustomer" Visible="False" >
+    <asp:Panel runat="server" ID="pnlCustomer" Visible="True" >
         <table>
             <tr>
                 <td>
                     <label>Customer Username</label>
                 </td>
                 <td>
-                    <asp:TextBox runat="server" ID="txtCustomerUsername" CssClass="form-control" ClientIDMode="Static" ReadOnly="True"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtCustomerUsername" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
                 </td>
                 <td>
-                    <label>Paid by this invoice</label>
+                    <label>Name</label>
                 </td>
                 <td>
-                    <asp:TextBox runat="server" ID="txtPaidByThisInvoice" CssClass="form-control" ClientIDMode="Static" ReadOnly="False"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtCustomerFullName" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
                 </td>
                 <td>
                     <label>Due by this invoice</label>
                 </td>
                 <td>
-                    <asp:TextBox runat="server" ID="txtDueByThisInvoice" CssClass="form-control" ClientIDMode="Static" ReadOnly="True"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtDueByThisInvoice" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
                 </td>
                 <td>
                     <label>Total due</label>
                 </td>
                 <td>
-                    <asp:TextBox runat="server" ID="txtTotalDue" CssClass="form-control" ClientIDMode="Static" ReadOnly="True"></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtTotalDue" ForeColor="Red" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
                 </td>
             </tr>
         </table>
@@ -234,6 +234,11 @@
                             $('#txtSaleReturnGrandTotal').val(data.d.TotalAmount.toFixed(2));
                             $('#txtDiscount').val(data.d.DiscountAmount.toFixed(2));
                             $('#txtPaidAmount').val(data.d.PaidAmount.toFixed(2));
+                            $('#txtCustomerUsername').val(data.d.CustomerUsername);
+                            $('#txtCustomerFullName').val(data.d.CustomerFullName);
+                            $('#txtDueByThisInvoice').val(data.d.DueByThisInvoice.toFixed(2));
+                            $('#txtTotalDue').val(data.d.TotalDue.toFixed(2));
+
                         },
                         error: function (result) {
                             alert('Not Match');

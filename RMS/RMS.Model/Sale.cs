@@ -23,6 +23,9 @@ namespace RMS.Model
         public byte? SortedBy { get; set; }
         public string Remarks { get; set; }
         public string CustomerUsername { get; set; }
+        public string CustomerFullName { get; set; }
+        public decimal DueByThisInvoice { get; set; }
+        public decimal TotalDue { get; set; }
 
     }
 }

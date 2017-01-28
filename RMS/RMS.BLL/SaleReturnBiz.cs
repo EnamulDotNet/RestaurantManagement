@@ -155,11 +155,13 @@ namespace RMS.BLL
             objDataAccess = DataAccess.NewDataAccess();
             objDbCommand = objDataAccess.GetCommand(true, IsolationLevel.Serializable);
             int noOfAffacted = 0;
+            objDbCommand.AddInParameter("CustomerUsername", objSaleReturn.CustomerUsername);
             objDbCommand.AddInParameter("InvoiceNumber", objSaleReturn.InvoiceNumber);
             objDbCommand.AddInParameter("ProductId", objSaleReturn.ProductId);
             objDbCommand.AddInParameter("ReturnQuantity", objSaleReturn.ReturnQuantity);
+            objDbCommand.AddInParameter("ReturnAmount", objSaleReturn.ReturnAmount);
             objDbCommand.AddInParameter("UserId", objSaleReturn.CreatedBy);
-            objDbCommand.AddInParameter("Remarks", objSaleReturn.Remarks??(object)DBNull.Value);
+            objDbCommand.AddInParameter("Remarks", objSaleReturn.Remarks);
             
             try
             {
